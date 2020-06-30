@@ -16,17 +16,20 @@ public class MovementController : MonoBehaviour
     private Vector3 posA;
     private Vector3 posB;
     private float pointDist;
+
+    private int numPos;
     // Start is called before the first frame update
     void Start()
     {
         cc = GameObject.FindObjectOfType<ConveyorController>();
+        numPos = cc.conveyorPositions.Count;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Conveyor")
         {
-            getPoints();
+            SetNext();
             onConveyor = true;
         }
     }
@@ -49,9 +52,9 @@ public class MovementController : MonoBehaviour
             if(progress >= 1)
             {
                 checkpoint++;
-                if(cc.isLooping || checkpoint < cc.conveyorPositions.Count - 1)
+                if(cc.isLooping || checkpoint < numPos - 1)
                 {
-                    getPoints();
+                    SetNext();
                 }
                 
                     
@@ -60,12 +63,13 @@ public class MovementController : MonoBehaviour
 
     }
 
-    void getPoints() 
+    void SetNext()
     {
-        progress = 0;
-        pointDist = 0;
-        posA = cc.conveyorPositions [checkpoint % cc.conveyorPositions.Count].transform.position;
-        posB = cc.conveyorPositions [(checkpoint + 1) % cc.conveyorPositions.Count].transform.position;
+        posA = cc.conveyorPositions[checkpoint % numPos].transform.position;
+        posB = cc.conveyorPositions[(checkpoint + 1) % numPos].transform.position;
+        Debug.Log(checkpoint % numPos + ":" + (checkpoint + 1) % numPos);
         pointDist = Vector3.Distance(posA, posB);
+        progress = 0;
     }
+
 }

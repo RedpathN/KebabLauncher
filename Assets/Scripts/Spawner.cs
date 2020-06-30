@@ -6,6 +6,7 @@ public class Spawner : MonoBehaviour
 {
     public List<GameObject> FoodItems;
     private float itemSpacing;
+    private float conveyorlength
 
 
 }

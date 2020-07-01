@@ -67,7 +67,7 @@ public class MovementController : MonoBehaviour
     {
         posA = cc.conveyorPositions[checkpoint % numPos].transform.position;
         posB = cc.conveyorPositions[(checkpoint + 1) % numPos].transform.position;
-        Debug.Log(checkpoint % numPos + ":" + (checkpoint + 1) % numPos);
+        //Debug.Log(checkpoint % numPos + ":" + (checkpoint + 1) % numPos);
         pointDist = Vector3.Distance(posA, posB);
         progress = 0;
     }

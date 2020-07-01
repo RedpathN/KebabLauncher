@@ -8,32 +8,27 @@ public class ConveyorController : MonoBehaviour
     public List<GameObject> conveyorPositions;
     public bool isLooping;
 
-    public float[] conveyorLengths;
+    public float conveyorLength = 0;
 
     private LineRenderer lr;
 
-    private void Awake() => lr = GameObject.Find("ConveyorLine").GetComponent<LineRenderer>();
-
-    private void Start()
+    private void Awake()
     {
+        lr = GameObject.Find("ConveyorLine").GetComponent<LineRenderer>();
         lr.positionCount = isLooping ? conveyorPositions.Count + 1 : conveyorPositions.Count;
-        for(int i = 0; i < conveyorPositions.Count; i++)
+        for (int i = 0; i < conveyorPositions.Count; i++)
         {
-            
-            lr.SetPosition(i, conveyorPositions[ i % lr.positionCount].transform.position);
+            getPoint(i);
+            lr.SetPosition(i, conveyorPositions[i % lr.positionCount].transform.position);
         }
-        
     }
 
-    void getPoints()
+
+    void getPoint( int i )
     {
-        for(int i = 0; i < conveyorPositions.Count; i++)
-        {
             Vector3 posA = conveyorPositions[i % conveyorPositions.Count].transform.position;
             Vector3 posB = conveyorPositions[(i + 1) % conveyorPositions.Count].transform.position;
-            conveyorLengths[i] = Vector3.Distance(posA, posB);
-        }
-        
-
+            conveyorLength += Vector3.Distance(posA, posB);
     }
+
 }

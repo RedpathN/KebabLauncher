@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class SetTiling : MonoBehaviour
 {
-
+    private LineRenderer line;
     private ConveyorController cc;
-    // Start is called before the first frame update
-    void Start()
-    {
-        cc = GameObject.FindObjectOfType<ConveyorController>();
-        GetComponent<Renderer>().material.mainTextureScale = new Vector2(cc.conveyorLength, 1);
 
+    void Awake()
+    {
+        line = GetComponent<LineRenderer>();
+        cc = GameObject.FindObjectOfType<ConveyorController>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        line.material.SetTextureOffset("_MainTex", new Vector2(-Time.time, 0f));
+        line.material.SetTextureScale("_MainTex", new Vector2(cc.conveyorLength * 3, 1f));
     }
+
 }

@@ -9,6 +9,7 @@ public class ConveyorController : MonoBehaviour
     public bool isLooping;
 
     public float conveyorLength = 0;
+    public float speed = 1;
 
     private LineRenderer lr;
 

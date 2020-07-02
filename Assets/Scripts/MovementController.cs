@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovementController : MonoBehaviour
 {
 
-    public float speed = 5;
+    private float speed;
 
     private bool onConveyor = false;
     private int checkpoint = 0;
@@ -47,7 +47,7 @@ public class MovementController : MonoBehaviour
     {
         if (onConveyor)
         {
-            progress += (1/pointDist) * (speed * Time.fixedDeltaTime);
+            progress += (1/pointDist) * (cc.speed * Time.fixedDeltaTime);
             gameObject.transform.position = Vector3.Lerp(posA, posB, progress );
             if(progress >= 1)
             {

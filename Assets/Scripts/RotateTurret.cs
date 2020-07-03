@@ -12,8 +12,7 @@ public class RotateTurret : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        skewer_inst = Instantiate(skewer, transform.position, new Quaternion());
-        skewer_inst.transform.SetParent(gameObject.transform);
+        SpawnSkewer();
     }
 
     // Update is called once per frame
@@ -27,9 +26,10 @@ public class RotateTurret : MonoBehaviour
         {
             gameObject.transform.Rotate(new Vector3(0,rotationSpeed*Time.deltaTime,0));
         }
-        if(Input.GetKey(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space))
         {
             FireSkewer();
+            SpawnSkewer();
         }
     }
 
@@ -37,5 +37,11 @@ public class RotateTurret : MonoBehaviour
     {
         skewer_inst.transform.parent = null;
         skewer_inst.GetComponent<Skewer>().isFired = true;
+    }
+
+    void SpawnSkewer()
+    {
+        skewer_inst = Instantiate(skewer, transform.position, transform.rotation);
+        skewer_inst.transform.SetParent(gameObject.transform);
     }
 }

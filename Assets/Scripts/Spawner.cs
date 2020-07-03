@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    public List<GameObject> FoodItems;
 
-    public float itemSpacing;
     public float itemCount;
 
+
+    private GameController gc;
     private ConveyorController cc;
 
     private float conveyorLength;
@@ -16,7 +16,7 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
-
+        gc = GameObject.FindObjectOfType<GameController>();
         cc = GameObject.FindObjectOfType<ConveyorController>();
         conveyorLength = cc.conveyorLength;
 
@@ -26,7 +26,7 @@ public class Spawner : MonoBehaviour
     {
         spawnTimer += Time.deltaTime;
 
-        if(spawnTimer > itemSpacing && itemCount <= Mathf.Floor(conveyorLength / itemSpacing))
+        if(spawnTimer > gc.itemSpacing && itemCount < Mathf.Floor(conveyorLength / gc.itemSpacing))
         {
             SpawnItem();
         }
@@ -35,7 +35,7 @@ public class Spawner : MonoBehaviour
 
     private void SpawnItem()
     {
-        Instantiate(FoodItems[Random.Range(0, FoodItems.Count)]);
+        Instantiate(gc.FoodItems[Random.Range(0, gc.FoodItems.Count)]);
         spawnTimer = 0;
         itemCount++;
         

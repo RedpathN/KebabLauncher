@@ -5,8 +5,6 @@ using UnityEngine;
 public class MovementController : MonoBehaviour
 {
 
-    private float speed;
-
     private bool onConveyor = false;
     private int checkpoint = 0;
     private float progress;
@@ -16,11 +14,15 @@ public class MovementController : MonoBehaviour
     private Vector3 posA;
     private Vector3 posB;
     private float pointDist;
+    public bool isSkewered = false;
+
+    private GameController gc;
 
     private int numPos;
     // Start is called before the first frame update
     void Start()
     {
+        gc = GameObject.FindObjectOfType<GameController>();
         cc = GameObject.FindObjectOfType<ConveyorController>();
         numPos = cc.conveyorPositions.Count;
     }
@@ -45,9 +47,9 @@ public class MovementController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (onConveyor)
+        if (onConveyor && !isSkewered)
         {
-            progress += (1/pointDist) * (cc.speed * Time.fixedDeltaTime);
+            progress += (1/pointDist) * (gc.speed * Time.fixedDeltaTime);
             gameObject.transform.position = Vector3.Lerp(posA, posB, progress );
             if(progress >= 1)
             {

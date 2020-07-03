@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Conveyor
+  - FoodItem
+  - Skewer
   layers:
   - Default
   - TransparentFX

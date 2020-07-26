@@ -46,4 +46,10 @@ MonoBehaviour:
   FoodItems:
   - {fileID: 6206756692266593413, guid: bf9d5ef3d01c87b4bbbc2a797b5bd0f9, type: 3}
   - {fileID: 8622995532902859526, guid: 60ba9d70873257b4da6a52a889e33d50, type: 3}
+  - {fileID: 8622995532902859526, guid: 773db1d5dfd683844bb6e707655edcaa, type: 3}
+  currentRecipe: []
+  recipeText: {fileID: 0}
+  correctText: {fileID: 0}
   speed: 0
+  itemSpacing: 1
+  recipeItemCount: 0
